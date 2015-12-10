@@ -39,6 +39,7 @@ static State states[30][30] = {
 
         [state5][DO] = state6,
         [state6][BEGIN] = state7,
+        [state6][LITERAL] = state13,
 
         [state7][IF] = state8,
         [state8][LITERAL] = state9,
@@ -50,57 +51,31 @@ static State states[30][30] = {
         [state10][LITERAL] = state11,
         [state11][RPAREN] = state12,
 
-        [state12][THEN] = state14,
+        [state12][THEN] = state7,
+        [state12][END] = state17,
+        [state13][ASSIGN] = state14,
+        [state13][DOT] = state6,
         [state14][LITERAL] = state15,
-        [state15][ASSIGN] = state16,
-        [state16][LITERAL] = state17,
-        [state16][NUMBER] = state17,
+        [state15][POINTER] = state16,
+        [state15][DOT] = state14,
+        [state16][DOT] = state14,
 
-        [state17][PLUS] = state16,
+        [state15][SEMI] = state6,
+        [state15][PLUS] = state14,
+        [state15][LITERAL] = state13,
+        [state15][SLASH] = state14,
+        [state15][END] = state17,
 
-        [state17][SEMI] = final,
+        [state15][LPAREN] = state10,
 
-//        // left
-//        [state2][NIL] = state3,
-//        [state3][NOT_EQUAL] = state7,
-//        [state3][EQUAL] = state7,
-//
-//        [state2][LITERAL] = state4,
-//        [state4][DOT] = state6,
-//        [state4][POINTER] = state5,
-//        [state4][EQUAL] = state7,
-//        [state4][NOT_EQUAL] = state7,
-//        [state5][DOT] = state6,
-//        [state6][LITERAL] = state4,
-//
-//        // right
-//        [state7][NIL] = state8,
-//        [state7][LITERAL] = state9,
-//        [state9][DOT] = state12,
-//        [state9][POINTER] = state11,
-//        [state9][DO] = state13,
-//        [state10][POINTER] = state11,
-//        [state11][DOT] = state12,
-//        [state12][LITERAL] = state9,
-//
-//        [state8][DO] = state13,
-//        [state13][BEGIN] = state14,
-//        [state13][IF] = state14,
-//
-//
-//        [state4][NIL] = state5,
-//        [state4][LITERAL] = state5,
-//        [state5][DO] = state6,
-//        [state6][BEGIN] = state7,
-//        [state7][IF] = state7,
-//
-//
-//
-////        [final][WHILE] = final,
-////        [final][WHILE] = final,
-////        [final][WHILE] = final,
-////        [final][WHILE] = final,
-        [final][WHILE] = final
+        [state14][NUMBER] = state17,
+        [state17][SEMI] = state6,
+
+//        [state18][LITERAL] = state17,
+
+        [state7][LITERAL] = state13
+
+//        [final][WHILE] = final
 };
 
 void parse(FILE *fp, char *token, size_t size);
