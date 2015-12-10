@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.3)
-project(parser)
+project(src)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -ansi -pedantic -std=c99 -static-libgcc -static-libstdc++")
 
-set(SOURCE_FILES main.c parser/parser.c parser/parser.h parser/scanner.c parser/scanner.h)
-add_executable(parser ${SOURCE_FILES})
+set(SOURCE_FILES main.c src/parser.c src/parser.h src/scanner.c src/scanner.h)
+add_executable(src ${SOURCE_FILES})
