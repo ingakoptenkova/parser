@@ -20,10 +20,7 @@ typedef enum {
     state14,
     state15,
     state16,
-    state17,
-    state18,
-    state19,
-    final
+    state17
 } State;
 
 static State states[30][30] = {
@@ -71,11 +68,7 @@ static State states[30][30] = {
         [state14][NUMBER] = state17,
         [state17][SEMI] = state6,
 
-//        [state18][LITERAL] = state17,
-
         [state7][LITERAL] = state13
-
-//        [final][WHILE] = final
 };
 
 void parse(FILE *fp, char *token, size_t size);

@@ -5,9 +5,9 @@
 int main() {
     char token[20];
 
-    FILE *fp = fopen("c:\\users\\alexey\\git\\parser\\example.txt", "r");
+    FILE *fp = fopen("c:\\users\\inga\\git\\parser\\example.txt", "r");
     if (fp == NULL) {
-        fprintf(stderr, "Error in opening file\n");
+        fprintf(stderr, "[main.c] - Error in opening file\n");
         exit(EXIT_FAILURE);
     }
 

@@ -68,7 +68,7 @@ void process_operator(FILE *fp, char *token, TokenType *tokenType, size_t size, 
             assign(SEMI, token, tokenType, size, c, i);
             break;
         default:
-            fprintf(stderr, "Unsupported punctuation character [%c]\n", c);
+            fprintf(stderr, "[scanner.c] - Unsupported punctuation character [%c]\n", c);
             break;
     }
 }
