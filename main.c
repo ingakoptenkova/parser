@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "parser/parser.h"
+#include "src/parser.h"
 
 int main() {
     char token[20];
@@ -8,7 +8,7 @@ int main() {
     FILE *fp = fopen("c:\\users\\inga\\git\\lexica\\example.txt", "r");
     if (fp == NULL) {
         fprintf(stderr, "Error in opening file\n");
-        return EXIT_FAILURE;
+        exit(EXIT_FAILURE);
     }
 
     parse(fp, token, sizeof(token));
