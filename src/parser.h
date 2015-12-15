@@ -16,59 +16,42 @@ typedef enum {
     state10,
     state11,
     state12,
-    state13,
+   /* state13,
     state14,
     state15,
     state16,
-    state17
+    state17*/
 } State;
 
 static State states[30][30] = {
-        [state1][WHILE] = state2,
-        [state2][LITERAL] = state3,
-        [state2][NIL] = state3,
+       /* if Tmp.Num = StrToInt(S) then
+        i := i+1;*/
 
-        [state3][NOT_EQUAL] = state4,
-        [state3][EQUAL] = state4,
+        [state1][IF] = state2,
+        [state2][LITERAL] = state3,
+
+        [state3][DOT] = state2,
+        [state3][EQUAL] = state2,
+        [state3][LPAREN] = state4,
 
         [state4][LITERAL] = state5,
-        [state4][NIL] = state5,
 
-        [state5][DO] = state6,
-        [state6][BEGIN] = state7,
-        [state6][LITERAL] = state13,
+        [state5][RPAREN] = state6,
 
-        [state7][IF] = state8,
-        [state8][LITERAL] = state9,
-        [state9][DOT] = state8,
+        [state6][THEN] = state7,
 
-        [state9][EQUAL] = state8,
+        [state7][LITERAL] = state8,
 
-        [state9][LPAREN] = state10,
-        [state10][LITERAL] = state11,
-        [state11][RPAREN] = state12,
+        [state8][ASSIGN] = state9,
 
-        [state12][THEN] = state7,
-        [state12][END] = state17,
-        [state13][ASSIGN] = state14,
-        [state13][DOT] = state6,
-        [state14][LITERAL] = state15,
-        [state15][POINTER] = state16,
-        [state15][DOT] = state14,
-        [state16][DOT] = state14,
+        [state9][LITERAL] = state10,
 
-        [state15][SEMI] = state6,
-        [state15][PLUS] = state14,
-        [state15][LITERAL] = state13,
-        [state15][SLASH] = state14,
-        [state15][END] = state17,
+        [state10][PLUS] = state11,
 
-        [state15][LPAREN] = state10,
+        [state11][NUMBER] = state12,
 
-        [state14][NUMBER] = state17,
-        [state17][SEMI] = state6,
+        [state12][SEMI] = state1
 
-        [state7][LITERAL] = state13
 };
 
 void parse(FILE *fp, char *token, size_t size);
