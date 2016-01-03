@@ -2,21 +2,10 @@
 #define LEXICA_SCANNER_H
 
 typedef enum {
-    NUMBER,
-    LITERAL,
-    ASSIGN,
-    NOT_EQUAL,
-    EQUAL,
-    POINTER,
-    DOT,
-    LPAREN,
-    RPAREN,
-    PLUS,
-    SLASH,
-    LT,
-    GT,
-    COLON,
-    SEMI,
+    INT,
+    ID,
+    DELIM,
+    DELIM2,
 
     IF,
     THEN,

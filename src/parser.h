@@ -28,29 +28,30 @@ static State states[30][30] = {
         i := i+1;*/
 
         [state1][IF] = state2,
-        [state2][LITERAL] = state3,
+        [state2][ID] = state3,
 
-        [state3][DOT] = state2,
-        [state3][EQUAL] = state2,
-        [state3][LPAREN] = state4,
+        [state3][DELIM] = state2,
+        [state3][DELIM] = state2,
+        [state3][DELIM] = state4,
 
-        [state4][LITERAL] = state5,
+        [state4][ID] = state5,
 
-        [state5][RPAREN] = state6,
+        [state5][DELIM] = state6,
 
         [state6][THEN] = state7,
+        [state6][ID] = state5,
 
-        [state7][LITERAL] = state8,
+        [state7][ID] = state8,
 
-        [state8][ASSIGN] = state9,
+        [state8][DELIM2] = state9,
 
-        [state9][LITERAL] = state10,
+        [state9][ID] = state10,
 
-        [state10][PLUS] = state11,
+        [state10][DELIM] = state11,
 
-        [state11][NUMBER] = state12,
+        [state11][INT] = state12,
 
-        [state12][SEMI] = state1
+        [state12][DELIM] = state1
 
 };
 

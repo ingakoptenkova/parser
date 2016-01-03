@@ -23,49 +23,49 @@ int assign(TokenType type, char *token, TokenType *tokenType, size_t size, int c
 void process_operator(FILE *fp, char *token, TokenType *tokenType, size_t size, int c, int *i) {
     switch (c) {
         case '.':
-            assign(DOT, token, tokenType, size, c, i);
+            assign(DELIM, token, tokenType, size, c, i);
             break;
         case '/':
-            assign(SLASH, token, tokenType, size, c, i);
+            assign(DELIM, token, tokenType, size, c, i);
             break;
         case '^':
-            assign(POINTER, token, tokenType, size, c, i);
+            assign(DELIM, token, tokenType, size, c, i);
             break;
         case '+':
-            assign(PLUS, token, tokenType, size, c, i);
+            assign(DELIM, token, tokenType, size, c, i);
             break;
         case ')':
-            assign(RPAREN, token, tokenType, size, c, i);
+            assign(DELIM, token, tokenType, size, c, i);
             break;
         case '(':
-            assign(LPAREN, token, tokenType, size, c, i);
+            assign(DELIM, token, tokenType, size, c, i);
             break;
         case '=':
-            assign(EQUAL, token, tokenType, size, c, i);
+            assign(DELIM, token, tokenType, size, c, i);
             break;
         case '<':
-            assign(LT, token, tokenType, size, c, i);
+            assign(DELIM, token, tokenType, size, c, i);
             c = fgetc(fp);
             if (c == '>') {
-                assign(NOT_EQUAL, token, tokenType, size, c, i);
+                assign(DELIM2, token, tokenType, size, c, i);
             } else {
                 ungetc(c, fp);
             }
             break;
         case '>':
-            assign(GT, token, tokenType, size, c, i);
+            assign(DELIM, token, tokenType, size, c, i);
             break;
         case ':':
-            assign(COLON, token, tokenType, size, c, i);
+            assign(DELIM, token, tokenType, size, c, i);
             c = fgetc(fp);
             if (c == '=') {
-                assign(ASSIGN, token, tokenType, size, c, i);
+                assign(DELIM2, token, tokenType, size, c, i);
             } else {
                 ungetc(c, fp);
             }
             break;
         case ';':
-            assign(SEMI, token, tokenType, size, c, i);
+            assign(DELIM, token, tokenType, size, c, i);
             break;
         default:
             fprintf(stderr, "[scanner.c] - Unsupported punctuation character [%c]\n", c);
@@ -81,7 +81,7 @@ int process_alpha_token(FILE *fp, char *token, TokenType *tokenType, size_t size
         c = fgetc(fp);
     } while (isalnum(c));
     ungetc(c, fp);
-    *tokenType = LITERAL;
+    *tokenType = ID;
 
     return EXIT_SUCCESS;
 }
@@ -95,7 +95,7 @@ int process_number_token(FILE *fp, char *token, TokenType *tokenType, size_t siz
         c = fgetc(fp);
     } while (isdigit(c));
     ungetc(c, fp);
-    *tokenType = NUMBER;
+    *tokenType = INT;
 
     return EXIT_SUCCESS;
 }
@@ -110,21 +110,11 @@ int strcicmp(char const *a, char const *b) {
 }
 
 const char *TokenTypeString[] = {
-        "NUMBER",
-        "LITERAL",
-        "ASSIGN",
-        "NOT_EQUAL",
-        "EQUAL",
-        "POINTER",
-        "DOT",
-        "LPAREN",
-        "RPAREN",
-        "PLUS",
-        "SLASH",
-        "LT",
-        "GT",
-        "COLON",
-        "SEMI",
+        "INT",
+        "ID",
+        "DELIM",
+        "DELIM2",
+
         "IF",
         "THEN",
         "WHILE",
@@ -165,7 +155,7 @@ int get_token(FILE *fp, char *token, TokenType *tokenType, size_t size) {
 
     *(token + i) = '\0';
 
-    if (*tokenType == LITERAL) {
+    if (*tokenType == ID) {
         for (int j = 0; j < sizeof(keywords) / sizeof(keywords[0]); j++) {
             if (!strcicmp(keywords[j].token, token)) {
                 *tokenType = keywords[j].tokenType;

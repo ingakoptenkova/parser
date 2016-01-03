@@ -1,0 +1,5 @@
+ IF <expression> THEN <statement>
+ <expression> ::= <variable> + <term> | <variable> = <expression> | <identifier> (<variable>)
+ <statement> ::= <variable> := <expression>
+ <variable> ::= <identifier> {. <identifier>}
+ <term> ::= 0..9
